@@ -17,45 +17,19 @@ import Button from "@mui/material/Button";
 const Event = () => {
   const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
-  const { logout } = useContext(AppContext);
-  const [fetch, setFetch] = useState(true);
-  const [events, setEvents] = useState([]);
+  const { logout, events, getEvents } = useContext(AppContext);
+  // const [events, setEvents] = useState([]);
   const [openDialog, setOpenDialog] = useState(false); // State for confirmation dialog
   const [eventToDelete, setEventToDelete] = useState(null); // ID of the event to delete
 
   useEffect(() => {
-    if (fetch) {
-      setIsLoading(true);
-      const fetchData = async () => {
-        try {
-          const res = await axios.get(`${API_URL}/events`);
-          const data = res.data;
-          setEvents(
-            data.map((event) => {
-              return {
-                ...event,
-                start: new Date(event.start),
-                end: new Date(event.end),
-              };
-            })
-          );
-          console.log(events);
-        } catch (err) {
-          alert(err.response.data);
-          console.log(err);
-          return;
-        }
-        setFetch(false);
-        setIsLoading(false);
-      };
-      fetchData();
-    }
-  }, [fetch, setFetch, events]);
+    getEvents(); // Fetch events when the component mounts
+  }, []);
 
   const addEvent = async (event) => {
     try {
       await axios.post(`${API_URL}/events/`, event);
-      setFetch(true);
+      await getEvents(); // Fetch the latest events after adding
     } catch (err) {
       alert(err.response.data);
       console.log(err);
@@ -69,7 +43,7 @@ const Event = () => {
   const updateEvent = async (event) => {
     try {
       await axios.put(`${API_URL}/events/${event.id}`, event);
-      setFetch(true);
+      await getEvents(); // Fetch the latest events after updating
     } catch (err) {
       alert(err.response.data);
       console.log(err);
@@ -77,7 +51,6 @@ const Event = () => {
         logout();
         nav("/login");
       }
-      return;
     }
   };
 
@@ -89,7 +62,10 @@ const Event = () => {
   const confirmDeleteEvent = async () => {
     try {
       await axios.delete(`${API_URL}/events/${eventToDelete}`);
-      setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventToDelete)); // Update state
+      await getEvents(); // Fetch the latest events after deleting
+      // setEvents((prevEvents) =>
+      //   prevEvents.filter((event) => event.id !== eventToDelete)
+      // ); // Update state
       setOpenDialog(false); // Close the dialog
     } catch (err) {
       console.log(err);
@@ -151,7 +127,6 @@ const Event = () => {
             events={events}
             addEvent={addEvent}
             updateEvent={updateEvent}
-          
           />
         </div>
       </div>
@@ -166,7 +141,8 @@ const Event = () => {
         <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this event? This action cannot be undone.
+            Are you sure you want to delete this event? This action cannot be
+            undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

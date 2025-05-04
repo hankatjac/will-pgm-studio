@@ -17,7 +17,7 @@ const Contact = () => {
     console.log("Form submitted:", data);
     try {
       setLoading(true);
-      const response = await axios.post(`${API_URL}/contact`, data);
+      const response = await axios.post(`${API_URL}/contact/willpgm`, data);
       const result = response.data;
       alert(result);
     } catch (error) {

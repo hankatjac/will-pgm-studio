@@ -45,15 +45,24 @@ const Menu = () => {
                 {t("home")}
               </Nav.Link>
 
-              <Nav.Link as={Link} eventKey="2" to="event">
-                {t("event")}
-              </Nav.Link>
-
-              <Nav.Link as={Link} eventKey="3" to="posts">
+              <Nav.Link as={Link} eventKey="3" to="/posts">
                 {t("posts")}
               </Nav.Link>
 
-              <Nav.Link as={Link} eventKey="5" to="contact">
+              <Nav.Link as={Link} eventKey="2" to="/event">
+                {t("event")}
+              </Nav.Link>
+
+              <Nav.Link as={Link} eventKey="5" to="/working-hours">
+                calculator
+              </Nav.Link>
+              <Nav.Link as={Link} eventKey="5" to="/todo">
+                todo
+              </Nav.Link>
+              <Nav.Link as={Link} eventKey="5" to="/recipe">
+                food recipe
+              </Nav.Link>
+              <Nav.Link as={Link} eventKey="5" to="/contact">
                 {t("contact")}
               </Nav.Link>
             </Nav>

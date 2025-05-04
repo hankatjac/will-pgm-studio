@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Calendar, dayjsLocalizer, Views } from "react-big-calendar";
-import dayjs from "dayjs";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,9 +8,10 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { Calendar, dayjsLocalizer, Views } from "react-big-calendar";
+import dayjs from "dayjs";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Box } from "@mui/system";
-
 
 const localizer = dayjsLocalizer(dayjs);
 
@@ -175,12 +174,15 @@ const Schedule = ({ events, addEvent, updateEvent }) => {
           <Button onClick={handleClose}>Cancel</Button>
           <Button
             onClick={() => {
+              if (!title.trim() || !desc.trim()) {
+                // alert("Title and Description are required!");
+                return; // Prevent submission if fields are empty
+              }
               handleNewAppointment();
               handleClose();
             }}
             autoFocus
           >
-            {" "}
             Submit
           </Button>
         </DialogActions>
@@ -256,6 +258,10 @@ const Schedule = ({ events, addEvent, updateEvent }) => {
           <Button onClick={handleClose}>Cancel</Button>
           <Button
             onClick={() => {
+              if (!title.trim() || !desc.trim()) {
+                // alert("Title and Description are required!");
+                return; // Prevent submission if fields are empty
+              }
               handleUpdateEvent();
               handleClose();
             }}

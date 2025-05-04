@@ -1,12 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import getCurrentUser from "../utils/getCurrentUser";
 import axios from "axios";
 import { API_URL } from "../apiPath";
 
 const AuthChecker = () => {
-  const currentUser = getCurrentUser();
+  const [currentUser, setCurentUser] = useState("");
   const location = useLocation();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = getCurrentUser();
+      setCurentUser(user);
+    };
+
+    checkUser();
+  }, [location]); // Runs on route change or when currentUser changes
 
   const removeCurrentUser = () => {
     localStorage.removeItem("currentUser");
