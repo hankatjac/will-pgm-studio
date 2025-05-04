@@ -55,13 +55,8 @@ const Blog = () => {
                       state={post}
                     >
                       <h1>{post.title}</h1>
-                      {post.img && (
-                        <img
-                          className="img-fluid"
-                          src={`${API_URL}/pictures/${post.img}`}
-                          alt=""
-                        />
-                      )}
+
+                      <img className="img-fluid" src={post.imgUrl} alt="" />
                     </Link>
                     <p
                       dangerouslySetInnerHTML={{

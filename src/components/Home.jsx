@@ -34,7 +34,7 @@ const Home = () => {
         <div className="box">
           <div className="box-info about">
             <Link to="/about">
-              <h2>About the school</h2>
+              <h2>About the studio</h2>
               <p>
                 Enim ad minim veniam nostrud exercitation ullamco laboris nisi
                 ut aliquip commodo consequat duis aute irure dolor.

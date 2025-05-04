@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/authContext";
+import { AppContext } from "../contexts/appContext";
 import { ColorRing } from "react-loader-spinner";
 import avatar from "../assets/img/logos/avatar_2x.png";
 
@@ -18,7 +18,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(AppContext);
 
   const submitForm = async (data) => {
     console.log(data);

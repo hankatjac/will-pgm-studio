@@ -5,52 +5,36 @@ import axios from "axios";
 import moment from "moment";
 import DOMPurify from "dompurify";
 import Sider from "./Sider";
-import { AuthContext } from "../../contexts/authContext";
+import { AppContext } from "../../contexts/appContext";
 import { API_URL } from "../../apiPath";
 import { MdDelete } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
+import getCurrentUser from "../../utils/getCurrentUser";
 
 const Single = () => {
   // const { id } = useParams();
-  // console.log(id);
-  // const [post, setPost] = useState({});
   const [readMore, setReadMore] = useState(false);
-  const nav = useNavigate();
+  const navigate = useNavigate();
   // const location = useLocation();
-
-
   // const postId = location.pathname.split("/")[2];
   // console.log(location.pathname.split("/"))
-  const { currentUser, logout, deletePostImage } = useContext(AuthContext);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get(`${API_URL}/posts/${id}`);
-  //       setPost(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //       alert(err.response.data);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [id]);
-
+  const { logout, deletePostImage } = useContext(AppContext);
+  const currentUser = getCurrentUser();
   const post = useLocation().state;
 
   const handleDelete = async () => {
     try {
       await axios.delete(`${API_URL}/posts/${post.id}`);
-      nav("/posts");
+      navigate("/posts");
     } catch (err) {
       console.log(err);
       if (err.response.status === 401) {
         logout();
-        nav("/login");
+        navigate("/login");
       }
       return;
     }
-    deletePostImage(post.img);
+    deletePostImage(post.imgId);
   };
 
   return (
@@ -66,7 +50,8 @@ const Single = () => {
               <div>
                 <Link
                   className="me-3"
-                  to={`/posts/write?edit=${post.id}`}
+                  // to={`/posts/write?edit=${post.id}`}
+                  to={`/posts/write/${post.id}`}
                   state={post}
                 >
                   <GrEdit
@@ -92,13 +77,7 @@ const Single = () => {
           </div>
           <h1>{post.title}</h1>
           <div>
-            {post.img && (
-              <img
-                className="img-fluid"
-                src={`${API_URL}/pictures/${post?.img}`}
-                alt=""
-              />
-            )}
+            <img className="img-fluid" src={post?.imgUrl} alt="" />
           </div>
 
           {readMore ? (

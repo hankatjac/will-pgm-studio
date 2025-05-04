@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { AuthContextProvider } from './contexts/authContext';
+import { AppContextProvider } from './contexts/appContext';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/style.scss";
 import "./i18n";
@@ -10,9 +10,9 @@ import "react-widgets/scss/styles.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
+    <AppContextProvider>
       <App />
-    </AuthContextProvider>
+    </AppContextProvider>
   </React.StrictMode>
 );
 

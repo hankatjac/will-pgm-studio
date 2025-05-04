@@ -7,12 +7,6 @@ import { AppContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "react-loader-spinner";
 import { MdDeleteForever } from "react-icons/md";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
 
 const Event = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +14,6 @@ const Event = () => {
   const { logout } = useContext(AppContext);
   const [fetch, setFetch] = useState(true);
   const [events, setEvents] = useState([]);
-  const [openDialog, setOpenDialog] = useState(false); // State for confirmation dialog
-  const [eventToDelete, setEventToDelete] = useState(null); // ID of the event to delete
 
   useEffect(() => {
     if (fetch) {
@@ -41,6 +33,7 @@ const Event = () => {
           );
           console.log(events);
         } catch (err) {
+          // setErr(err.response.data);
           alert(err.response.data);
           console.log(err);
           return;
@@ -50,7 +43,7 @@ const Event = () => {
       };
       fetchData();
     }
-  }, [fetch, setFetch, events]);
+  }, [fetch, setFetch]);
 
   const addEvent = async (event) => {
     try {
@@ -79,24 +72,33 @@ const Event = () => {
       }
       return;
     }
+
+    // const index = events.findIndex((event) => event === clickedEvent);
+    // const updatedEvents = events.slice();
+    // updatedEvents[index].title = event.title;
+    // updatedEvents[index].desc = event.desc;
+    // updatedEvents[index].start = new Date(event.start);
+    // updatedEvents[index].end = new Date(event.end);
+    // setEvents(updatedEvents);
   };
 
-  const handleDeleteClick = (id) => {
-    setEventToDelete(id); // Set the ID of the event to delete
-    setOpenDialog(true); // Open the confirmation dialog
-  };
+  //  filters out specific event that is to be deleted and set that variable to state
+  const deleteEvent = async (id) => {
+    if (confirm("Are you sure?")) {
+      try {
+        await axios.delete(`${API_URL}/events/${id}`);
+        setFetch(true);
 
-  const confirmDeleteEvent = async () => {
-    try {
-      await axios.delete(`${API_URL}/events/${eventToDelete}`);
-      setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventToDelete)); // Update state
-      setOpenDialog(false); // Close the dialog
-    } catch (err) {
-      console.log(err);
-      alert(err.response.data);
-      if (err.response.status === 401) {
-        logout();
-        nav("/login");
+        // Update the events state by filtering out the deleted event
+        // setEvents((previousEvents) => previousEvents.filter((event) => event.id !== id));
+      } catch (err) {
+        // setErr(err.response.data);
+        console.log(err);
+        alert(err.response.data);
+        if (err.response.status === 401) {
+          logout();
+          nav("/login");
+        }
       }
     }
   };
@@ -121,6 +123,7 @@ const Event = () => {
               const { id, title, desc, start, end } = event;
               return (
                 <div className="card mb-2" key={index}>
+                  {" "}
                   <div className="card-body">
                     <h2 className="card-title">
                       <a href="#">{title}</a>
@@ -139,7 +142,7 @@ const Event = () => {
                   <MdDeleteForever
                     size={30}
                     color="red"
-                    onClick={() => handleDeleteClick(id)} // Trigger the dialog
+                    onClick={() => deleteEvent(id)}
                   />
                 </div>
               );
@@ -151,31 +154,10 @@ const Event = () => {
             events={events}
             addEvent={addEvent}
             updateEvent={updateEvent}
-          
+            deleteEvent={deleteEvent}
           />
         </div>
       </div>
-
-      {/* Confirmation Dialog */}
-      <Dialog
-        open={openDialog}
-        onClose={() => setOpenDialog(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this event? This action cannot be undone.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-          <Button onClick={confirmDeleteEvent} color="error" autoFocus>
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 };

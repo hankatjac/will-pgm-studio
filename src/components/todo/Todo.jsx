@@ -4,14 +4,14 @@ import Tasks from "./Tasks";
 import AddTask from "./AddTask";
 import axios from "axios";
 import { API_URL } from "../../apiPath";
-import { AuthContext } from "../../contexts/authContext";
+import { AppContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "react-loader-spinner";
 
 const Todo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
-  const { logout } = useContext(AuthContext);
+  const { logout } = useContext(AppContext);
   const [showAddTask, setShowAddTask] = useState(false);
   const [fetch, setFetch] = useState(true);
   const [editTask, setEditTask] = useState("");

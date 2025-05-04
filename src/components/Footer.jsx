@@ -159,7 +159,7 @@ const Footer = () => {
         <div className="holder">
           <p className="copyright">
             {t("Copyright")}&copy;<span style={{ color: "white" }}></span>
-            Will-PGM school {new Date().getFullYear()}
+            Will-PGM studio {new Date().getFullYear()}
           </p>
           <p>All rights reseved</p>
         </div>
