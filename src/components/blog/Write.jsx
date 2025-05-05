@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -88,7 +88,7 @@ const Write = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (inputRef.current.files.length == 0 && !!blog == false) {
+    if (inputRef.current.files.length === 0 && !!blog === false) {
       setMessage(true);
       return;
     }

@@ -13,7 +13,7 @@ const Like = ({ cat, id }) => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/posts/?cat=${cat}`);
         let posts = res.data;
-        setFilterPost(posts.filter((post) => post.id != id));
+        setFilterPost(posts.filter((post) => post.id !== id));
       } catch (err) {
         console.log(err);
         alert(err.response.data);

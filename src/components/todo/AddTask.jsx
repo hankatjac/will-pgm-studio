@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-const AddTask = ({addTask, onEdit, toUpdateTask, setShowAddTask }) => 
-{
-  const [id, setId] = useState(toUpdateTask.id || "");
+const AddTask = ({ addTask, onEdit, toUpdateTask, setShowAddTask }) => {
+  const [id] = useState(toUpdateTask.id || ""); // Removed `setId`
   const [text, setText] = useState(toUpdateTask.text || "");
   const [day, setDay] = useState(toUpdateTask.day || "");
   const [reminder, setReminder] = useState(toUpdateTask.reminder || false);
@@ -15,11 +14,10 @@ const AddTask = ({addTask, onEdit, toUpdateTask, setShowAddTask }) =>
       return;
     }
     if (toUpdateTask) {
-      onEdit({id, text, day, reminder });
+      onEdit({ id, text, day, reminder });
       setShowAddTask(false);
-
     } else {
-    addTask({ text, day, reminder });
+      addTask({ text, day, reminder });
     }
 
     setText("");
@@ -57,7 +55,11 @@ const AddTask = ({addTask, onEdit, toUpdateTask, setShowAddTask }) =>
         />
       </div>
 
-      <input type="submit" value="Save Task" className="btn btn-info d-block mx-auto" />
+      <input
+        type="submit"
+        value="Save Task"
+        className="btn btn-info d-block mx-auto"
+      />
     </form>
   );
 };

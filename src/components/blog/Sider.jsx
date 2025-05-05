@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Like from "./Like";
 import { Link } from "react-router-dom";
-import { Button } from "bootstrap";
+
 
 const Sider = () => {
   const [keyword, setKeyword] = useState("");

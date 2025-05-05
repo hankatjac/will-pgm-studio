@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Like from "./Like";
 import axios from "axios";
 import moment from "moment";
