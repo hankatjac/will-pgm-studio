@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import axios from "axios";
 
 export const AppContext = createContext();
@@ -9,7 +9,10 @@ export const AppContextProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
 
   const login = async (data) => {
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data);
+    const res = await axios.post(
+      `${process.env.REACT_APP_API_URL}/auth/login`,
+      data
+    );
     localStorage.setItem("currentUser", JSON.stringify(res.data)); // Persistent storage
   };
 
@@ -35,7 +38,7 @@ export const AppContextProvider = ({ children }) => {
   //   return doc.body.textContent;
   // };
 
-  const getEvents = async () => {
+  const getEvents = useCallback(async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/events`);
       const data = res.data;
@@ -49,7 +52,7 @@ export const AppContextProvider = ({ children }) => {
       console.error(err);
       alert(err.response.data);
     }
-  };
+  }, []); // Empty dependency array ensures the function is memoized
 
   return (
     <AppContext.Provider

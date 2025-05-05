@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     getEvents(); // Fetch events when the component mounts
-  }, []);
+  }, [getEvents]);
 
 
   return (

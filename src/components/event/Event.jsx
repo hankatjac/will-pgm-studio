@@ -14,7 +14,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 
 const Event = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const nav = useNavigate();
   const { logout, events, getEvents } = useContext(AppContext);
   // const [events, setEvents] = useState([]);
@@ -23,7 +23,7 @@ const Event = () => {
 
   useEffect(() => {
     getEvents(); // Fetch events when the component mounts
-  }, []);
+  }, [getEvents]);
 
   const addEvent = async (event) => {
     try {
@@ -41,7 +41,10 @@ const Event = () => {
 
   const updateEvent = async (event) => {
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/events/${event.id}`, event);
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/events/${event.id}`,
+        event
+      );
       await getEvents(); // Fetch the latest events after updating
     } catch (err) {
       alert(err.response.data);
@@ -60,7 +63,9 @@ const Event = () => {
 
   const confirmDeleteEvent = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/events/${eventToDelete}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/events/${eventToDelete}`
+      );
       await getEvents(); // Fetch the latest events after deleting
       // setEvents((prevEvents) =>
       //   prevEvents.filter((event) => event.id !== eventToDelete)
@@ -98,7 +103,9 @@ const Event = () => {
                 <div className="card mb-2" key={index}>
                   <div className="card-body">
                     <h2 className="card-title">
-                      <a href="#">{title}</a>
+                      <button className="btn btn-outline-primary">
+                        {title}
+                      </button>
                     </h2>
                     <p className="card-text">{desc} </p>
                   </div>
