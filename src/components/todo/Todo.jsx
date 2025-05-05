@@ -16,32 +16,7 @@ const Todo = () => {
   const [editTask, setEditTask] = useState("");
   // const [err, setErr] = useState("");
 
-  const [tasks, setTasks] = useState([
-    // {
-    //   id: 1,
-    //   text: "Big Meeting",
-    //   day: "Feb 2 2023 03:00:00",
-    //   reminder: true,
-    // },
-    // {
-    //   id: 2,
-    //   text: "Vacation",
-    //   day: "Feb 2 2023 03:00:00",
-    //   reminder: true,
-    // },
-    // {
-    //   id: 3,
-    //   text: "Conference",
-    //   day: "Feb 2 2023 03:00:00",
-    //   reminder: true,
-    // },
-    // {
-    //   id: 4,
-    //   text: "Maintenance",
-    //   day: "Feb 2 2023 03:00:00",
-    //   reminder: true,
-    // },
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   // Fetch Task
   useEffect(() => {
@@ -63,9 +38,9 @@ const Todo = () => {
         setFetch(false);
         setIsLoading(false);
       };
-      fetchData();
+      fetchData(); 
     }
-  }, [fetch]);
+  }, [fetch, logout, nav]);
 
   // useEffect(() => {
   //   if (!isAuthenticated) {
@@ -103,7 +78,10 @@ const Todo = () => {
   const toggleReminder = async (task) => {
     const updTask = { ...task, reminder: !task.reminder };
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/todos/${task.id}`, updTask);
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/todos/${task.id}`,
+        updTask
+      );
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);
@@ -140,7 +118,10 @@ const Todo = () => {
   const handleEditTask2 = async (task) => {
     console.log(task.text);
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/todos/${task.id}`, task);
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/todos/${task.id}`,
+        task
+      );
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);
