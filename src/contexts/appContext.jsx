@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../apiPath";
 
 export const AppContext = createContext();
 
@@ -10,12 +9,12 @@ export const AppContextProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
 
   const login = async (data) => {
-    const res = await axios.post(`${API_URL}/auth/login`, data);
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data);
     localStorage.setItem("currentUser", JSON.stringify(res.data)); // Persistent storage
   };
 
   const logout = async () => {
-    await axios.post(`${API_URL}/auth/logout`);
+    await axios.post(`${process.env.REACT_APP_API_URL}/auth/logout`);
     localStorage.removeItem("currentUser"); // Clear persistent storage
   };
 
@@ -38,7 +37,7 @@ export const AppContextProvider = ({ children }) => {
 
   const getEvents = async () => {
     try {
-      const res = await axios.get(`${API_URL}/events`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/events`);
       const data = res.data;
       const formattedEvents = data.map((event) => ({
         ...event,

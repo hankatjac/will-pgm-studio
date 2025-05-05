@@ -26,7 +26,7 @@ export const uploadToCloudinary = async (file) => {
 //   try {
 //     const formData = new FormData();
 //     formData.append("photo", file);
-//     const res = await axios.post(`${API_URL}/upload`, formData);
+//     const res = await axios.post(`${process.env.REACT_APP_API_URL}/upload`, formData);
 //     return res.data;
 //   } catch (err) {
 //     console.log(err);

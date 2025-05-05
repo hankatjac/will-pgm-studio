@@ -6,7 +6,6 @@ import moment from "moment";
 import DOMPurify from "dompurify";
 import Sider from "./Sider";
 import { AppContext } from "../../contexts/appContext";
-import { API_URL } from "../../apiPath";
 import { MdDelete } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
 import getCurrentUser from "../../utils/getCurrentUser";
@@ -24,7 +23,7 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_URL}/posts/${post.id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${post.id}`);
       navigate("/posts");
     } catch (err) {
       console.log(err);

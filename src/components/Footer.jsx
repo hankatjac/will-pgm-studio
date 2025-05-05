@@ -5,7 +5,6 @@ import axios from "axios";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
-import { API_URL } from "../apiPath";
 import { ProgressBar } from "react-loader-spinner";
 
 const Footer = () => {
@@ -17,7 +16,7 @@ const Footer = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${API_URL}/posts`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/posts`);
         setBlogs(res.data);
       } catch (err) {
         console.log(err);

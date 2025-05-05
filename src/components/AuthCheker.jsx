@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import getCurrentUser from "../utils/getCurrentUser";
 import axios from "axios";
-import { API_URL } from "../apiPath";
+
 
 const AuthChecker = () => {
   const [currentUser, setCurentUser] = useState("");
@@ -30,7 +30,7 @@ const AuthChecker = () => {
       if (!currentUser || !currentUser.token) return; // Skip if no user or token
 
       try {
-        await axios.get(`${API_URL}/auth/validate`, {
+        await axios.get(`${process.env.REACT_APP_API_URL}/auth/validate`, {
           headers: {
             Authorization: `Bearer ${currentUser.token}`, // Include token in the request
           },

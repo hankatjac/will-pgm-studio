@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { API_URL } from "../../apiPath";
 import { ProgressBar } from "react-loader-spinner";
 
 const Like = ({ cat, id }) => {
@@ -12,7 +11,7 @@ const Like = ({ cat, id }) => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${API_URL}/posts/?cat=${cat}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/posts/?cat=${cat}`);
         let posts = res.data;
         setFilterPost(posts.filter((post) => post.id != id));
       } catch (err) {
@@ -44,7 +43,7 @@ const Like = ({ cat, id }) => {
               {post.img && (
                 <img
                   className="img-fluid"
-                  src={`${API_URL}/pictures/${post?.img}`}
+                  src={`${process.env.REACT_APP_API_URL}/pictures/${post?.img}`}
                   alt=""
                 />
               )}

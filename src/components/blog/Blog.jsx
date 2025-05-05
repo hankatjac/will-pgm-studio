@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Sider from "./Sider";
-import { API_URL } from "../../apiPath";
 import DOMPurify from "dompurify";
 import { ProgressBar } from "react-loader-spinner";
 
@@ -17,7 +16,7 @@ const Blog = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${API_URL}/posts${cat}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/posts${cat}`);
         setPosts(res.data);
       } catch (err) {
         console.log(err);

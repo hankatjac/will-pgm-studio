@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { API_URL } from "../apiPath";
+
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ const Contact = () => {
     console.log("Form submitted:", data);
     try {
       setLoading(true);
-      const response = await axios.post(`${API_URL}/contact/willpgm`, data);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/contact/willpgm`, data);
       const result = response.data;
       alert(result);
     } catch (error) {

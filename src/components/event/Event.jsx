@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Schedule from "./Schedule";
 import moment from "moment";
 import axios from "axios";
-import { API_URL } from "../../apiPath";
 import { AppContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "react-loader-spinner";
@@ -28,7 +27,7 @@ const Event = () => {
 
   const addEvent = async (event) => {
     try {
-      await axios.post(`${API_URL}/events/`, event);
+      await axios.post(`${process.env.REACT_APP_API_URL}/events/`, event);
       await getEvents(); // Fetch the latest events after adding
     } catch (err) {
       alert(err.response.data);
@@ -42,7 +41,7 @@ const Event = () => {
 
   const updateEvent = async (event) => {
     try {
-      await axios.put(`${API_URL}/events/${event.id}`, event);
+      await axios.put(`${process.env.REACT_APP_API_URL}/events/${event.id}`, event);
       await getEvents(); // Fetch the latest events after updating
     } catch (err) {
       alert(err.response.data);
@@ -61,7 +60,7 @@ const Event = () => {
 
   const confirmDeleteEvent = async () => {
     try {
-      await axios.delete(`${API_URL}/events/${eventToDelete}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/events/${eventToDelete}`);
       await getEvents(); // Fetch the latest events after deleting
       // setEvents((prevEvents) =>
       //   prevEvents.filter((event) => event.id !== eventToDelete)

@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { API_URL } from "../apiPath";
 import axios from "axios";
 
 const Register = () => {
@@ -25,7 +24,7 @@ const Register = () => {
   const submitForm = async (data) => {
     setMessage("");
     try {
-      await axios.post(`${API_URL}/auth/register`, data);
+      await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, data);
       navigate("/login");
       setSuccessful(true);
     } catch (err) {

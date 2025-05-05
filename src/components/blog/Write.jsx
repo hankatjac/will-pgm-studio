@@ -1,5 +1,4 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import { API_URL } from "../../apiPath";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -71,7 +70,7 @@ const Write = () => {
       if (blog) {
         try {
           // Delete the image from Cloudinary
-          await axios.post(`${API_URL}/img/cloudinary/delete`, {
+          await axios.post(`${process.env.REACT_APP_API_URL}/img/cloudinary/delete`, {
             public_ids: [blog.imgId], // Pass an array of public IDs for the images
           });
         } catch (err) {
@@ -104,7 +103,7 @@ const Write = () => {
     try {
       if (blog) {
         setIsLoading(true);
-        await axios.put(`${API_URL}/posts/${blog.id}`, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/posts/${blog.id}`, {
           title,
           desc: value,
           cat,
@@ -114,7 +113,7 @@ const Write = () => {
         file && deletePostImage(blog.public_id);
       } else {
         setIsLoading(true);
-        await axios.post(`${API_URL}/posts/`, {
+        await axios.post(`${process.env.REACT_APP_API_URL}/posts/`, {
           title,
           desc: value,
           cat,

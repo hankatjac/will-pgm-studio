@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Schedule from "./Schedule";
 import moment from "moment";
 import axios from "axios";
-import { API_URL } from "../../apiPath";
 import { AppContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "react-loader-spinner";
@@ -20,7 +19,7 @@ const Event = () => {
       setIsLoading(true);
       const fetchData = async () => {
         try {
-          const res = await axios.get(`${API_URL}/events`);
+          const res = await axios.get(`${process.env.REACT_APP_API_URL}/events`);
           const data = res.data;
           setEvents(
             data.map((event) => {
@@ -47,7 +46,7 @@ const Event = () => {
 
   const addEvent = async (event) => {
     try {
-      await axios.post(`${API_URL}/events/`, event);
+      await axios.post(`${process.env.REACT_APP_API_URL}/events/`, event);
       setFetch(true);
     } catch (err) {
       alert(err.response.data);
@@ -61,7 +60,7 @@ const Event = () => {
 
   const updateEvent = async (event) => {
     try {
-      await axios.put(`${API_URL}/events/${event.id}`, event);
+      await axios.put(`${process.env.REACT_APP_API_URL}/events/${event.id}`, event);
       setFetch(true);
     } catch (err) {
       alert(err.response.data);
@@ -86,7 +85,7 @@ const Event = () => {
   const deleteEvent = async (id) => {
     if (confirm("Are you sure?")) {
       try {
-        await axios.delete(`${API_URL}/events/${id}`);
+        await axios.delete(`${process.env.REACT_APP_API_URL}/events/${id}`);
         setFetch(true);
 
         // Update the events state by filtering out the deleted event
