@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/will-pgm-school-web/static/css/main.d37df96c.css",
-    "main.js": "/will-pgm-school-web/static/js/main.64884e1c.js",
-    "static/media/childrens-education-1920x1080.jpg": "/will-pgm-school-web/static/media/childrens-education-1920x1080.16497d9f9e3f73f990d1.jpg",
-    "static/media/hero-bg.jpg": "/will-pgm-school-web/static/media/hero-bg.8947f2200e2804d08f4d.jpg",
-    "index.html": "/will-pgm-school-web/index.html",
-    "main.d37df96c.css.map": "/will-pgm-school-web/static/css/main.d37df96c.css.map",
-    "main.64884e1c.js.map": "/will-pgm-school-web/static/js/main.64884e1c.js.map"
+    "main.css": "/will-pgm-studio/static/css/main.6e57a2b3.css",
+    "main.js": "/will-pgm-studio/static/js/main.50f1bf35.js",
+    "index.html": "/will-pgm-studio/index.html",
+    "main.6e57a2b3.css.map": "/will-pgm-studio/static/css/main.6e57a2b3.css.map",
+    "main.50f1bf35.js.map": "/will-pgm-studio/static/js/main.50f1bf35.js.map"
   },
   "entrypoints": [
-    "static/css/main.d37df96c.css",
-    "static/js/main.64884e1c.js"
+    "static/css/main.6e57a2b3.css",
+    "static/js/main.50f1bf35.js"
   ]
 }
