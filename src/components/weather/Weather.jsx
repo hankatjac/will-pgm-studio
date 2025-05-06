@@ -60,7 +60,6 @@ const Weather = () => {
     }
   };
 
-
   useEffect(() => {
     // Default search data for Montreal
     const defaultSearchData = {
@@ -71,13 +70,11 @@ const Weather = () => {
     fetchWeatherData(defaultSearchData);
   }, []);
 
-
-
   // axios.get(url, { validateStatus: () => true })
 
   return (
     <div className="container py-5">
-      <div className="col-6">
+      <div style={{ maxWidth: "500px", margin: "auto" }}>
         <Search fetchWeatherData={fetchWeatherData} />
       </div>
       {currentWeather && <CurrentWeather data={currentWeather} />}
