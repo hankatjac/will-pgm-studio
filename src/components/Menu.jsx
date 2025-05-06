@@ -62,6 +62,9 @@ const Menu = () => {
               <Nav.Link as={Link} eventKey="5" to="/recipe">
                 food recipe
               </Nav.Link>
+              <Nav.Link as={Link} eventKey="5" to="/weather">
+                weather
+              </Nav.Link>
               <Nav.Link as={Link} eventKey="5" to="/contact">
                 {t("contact")}
               </Nav.Link>

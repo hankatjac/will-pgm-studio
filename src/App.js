@@ -16,6 +16,7 @@ import Todo from "./components/todo/Todo";
 import FoodRecipe from "./components/recipe/FoodRecipe";
 import Recipe from "./components/recipe/Recipe";
 import getCurrentUser from "./utils/getCurrentUser";
+import Weather from "./components/weather/Weather";
 
 function App() {
   const currentUser = getCurrentUser();
@@ -38,6 +39,12 @@ function App() {
           <Route path="todo" element={<Todo />} />
           <Route path="recipe" element={<FoodRecipe />} />
           <Route path="recipe/:id" element={<Recipe />} />
+          <Route path="recipe/:id" element={<Recipe />} />
+          <Route path="/weather" element={<Weather />} />
+
+
+
+
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
