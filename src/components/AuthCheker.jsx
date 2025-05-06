@@ -15,7 +15,7 @@ const AuthChecker = () => {
     };
 
     checkUser();
-  }, [location, getCurrentUser]); // Runs on route change or when currentUser changes
+  }, [location]); // Runs on route change or when currentUser changes
 
   const removeCurrentUser = () => {
     localStorage.removeItem("currentUser");
