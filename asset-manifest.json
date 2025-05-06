@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/will-pgm-studio/static/css/main.6e57a2b3.css",
-    "main.js": "/will-pgm-studio/static/js/main.ad35be66.js",
+    "main.css": "/will-pgm-studio/static/css/main.245472eb.css",
+    "main.js": "/will-pgm-studio/static/js/main.35632d0c.js",
     "index.html": "/will-pgm-studio/index.html",
-    "main.6e57a2b3.css.map": "/will-pgm-studio/static/css/main.6e57a2b3.css.map",
-    "main.ad35be66.js.map": "/will-pgm-studio/static/js/main.ad35be66.js.map"
+    "main.245472eb.css.map": "/will-pgm-studio/static/css/main.245472eb.css.map",
+    "main.35632d0c.js.map": "/will-pgm-studio/static/js/main.35632d0c.js.map"
   },
   "entrypoints": [
-    "static/css/main.6e57a2b3.css",
-    "static/js/main.ad35be66.js"
+    "static/css/main.245472eb.css",
+    "static/js/main.35632d0c.js"
   ]
 }
