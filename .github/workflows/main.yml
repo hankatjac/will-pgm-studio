@@ -32,6 +32,8 @@ jobs:
         env:
           REACT_APP_UPLOAD_LINK: ${{ secrets.REACT_APP_UPLOAD_LINK }}
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_WEATHER_API_KEY: ${{ secrets.REACT_APP_WEATHER_API_KEY }}
+          REACT_APP_RAPID_API_KEY: ${{ secrets.REACT_APP_RAPID_API_KEY }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
