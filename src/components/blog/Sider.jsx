@@ -69,7 +69,7 @@ const Sider = () => {
       <aside>
         <div className="text-center">
           <Link className="btn btn-info mb-3" to="/posts/write">
-            Post a news
+            Post a Blog
           </Link>
         </div>
       </aside>

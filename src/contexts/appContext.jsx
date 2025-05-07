@@ -24,7 +24,7 @@ export const AppContextProvider = ({ children }) => {
   const deletePostImage = async (id) => {
     try {
       // Delete the images from Cloudinary
-      await axios.post("img/cloudinary/delete", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/img/cloudinary/delete`, {
         public_ids: [id],
       });
     } catch (err) {
