@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/will-pgm-studio/static/css/main.245472eb.css",
-    "main.js": "/will-pgm-studio/static/js/main.b762eddb.js",
+    "main.js": "/will-pgm-studio/static/js/main.085d8df7.js",
     "index.html": "/will-pgm-studio/index.html",
     "main.245472eb.css.map": "/will-pgm-studio/static/css/main.245472eb.css.map",
-    "main.b762eddb.js.map": "/will-pgm-studio/static/js/main.b762eddb.js.map"
+    "main.085d8df7.js.map": "/will-pgm-studio/static/js/main.085d8df7.js.map"
   },
   "entrypoints": [
     "static/css/main.245472eb.css",
-    "static/js/main.b762eddb.js"
+    "static/js/main.085d8df7.js"
   ]
 }
