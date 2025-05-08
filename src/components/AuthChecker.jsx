@@ -17,23 +17,21 @@ const AuthChecker = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      if (!currentUser || !currentUser.token) {
-        console.log("No user or token, skipping auth check.");
-        return;
-      }
-
-      try {
-        console.log("Checking authentication...");
-        await axios.get(`${process.env.REACT_APP_API_URL}/auth/validate`, {
-          headers: {
-            Authorization: `Bearer ${currentUser.token}`,
-          },
-        });
-        console.log("Authentication valid.");
-      } catch (err) {
-        console.error("Error during authentication check:", err);
-        if (err.response?.status === 401) {
-          removeCurrentUser();
+      if (currentUser) {
+        try {
+          console.log("Checking authentication...");
+          await axios.get(
+            `${process.env.REACT_APP_API_URL}/auth/validate`
+            // {
+            //   headers: {Authorization: `Bearer ${currentUser.token}`},
+            // }
+          );
+          console.log("Authentication valid.");
+        } catch (err) {
+          console.error(err.response.data.message);
+          if (err.response?.status === 401) {
+            removeCurrentUser();
+          }
         }
       }
     };

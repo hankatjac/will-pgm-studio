@@ -33,8 +33,6 @@ const FoodRecipe = () => {
     fetchData(recipeName);
   };
 
-  console.log(recipes);
-
   return (
     <section >
       <header className="recipe-header">

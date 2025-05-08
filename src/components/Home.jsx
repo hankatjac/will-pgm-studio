@@ -36,7 +36,7 @@ const Home = () => {
             </div>
             <div className="col-md-6">
               <div className="row">
-                <div className="col-4 col-md-6 col-lg-4 p-5">
+                <div className="col-6 col-lg-4 p-5">
                   <Link to="/posts">
                     <img
                       className="img-fluid d-block mx-auto"
@@ -45,7 +45,7 @@ const Home = () => {
                     />
                   </Link>
                 </div>
-                <div className="col-4 col-md-6 col-lg-4 p-5">
+                <div className="col-6 col-lg-4 p-5">
                   <Link to="/event">
                     <img
                       className="img-fluid d-block mx-auto"
@@ -54,7 +54,7 @@ const Home = () => {
                     />
                   </Link>
                 </div>
-                <div className="col-4 col-md-6 col-lg-4 p-5">
+                <div className="col-6 col-lg-4 p-5">
                   <Link to="/working-hours">
                     <img
                       className="img-fluid d-block mx-auto"
@@ -65,7 +65,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-4 col-md-6 col-lg-4 p-5">
+                <div className="col-6 col-lg-4 p-5">
                   <Link to="/todo">
                     <img
                       className="img-fluid d-block mx-auto"
@@ -74,7 +74,7 @@ const Home = () => {
                     />
                   </Link>
                 </div>
-                <div className="col-4 col-md-6 col-lg-4 p-5">
+                <div className="col-6 col-lg-4 p-5">
                   <Link to="/recipe">
                     <img
                       className="img-fluid d-block mx-auto"
@@ -83,7 +83,7 @@ const Home = () => {
                     />
                   </Link>
                 </div>
-                <div className="col-4 col-md-6 col-lg-4 p-5">
+                <div className="col-6 col-lg-4 p-5">
                   <Link to="/weather">
                     <img
                       className="img-fluid d-block mx-auto"
@@ -94,7 +94,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-4 col-md-6 col-lg-4 p-5">
+                <div className="col-6 col-lg-4 p-5">
                   <Link to="/contact">
                     <img
                       className="img-fluid d-block mx-auto"
