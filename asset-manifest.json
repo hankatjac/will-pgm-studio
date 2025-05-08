@@ -1,13 +1,20 @@
 {
   "files": {
     "main.css": "/will-pgm-studio/static/css/main.245472eb.css",
-    "main.js": "/will-pgm-studio/static/js/main.c8235db6.js",
+    "main.js": "/will-pgm-studio/static/js/main.2c1dd39f.js",
+    "static/media/blog-svgrepo-com.svg": "/will-pgm-studio/static/media/blog-svgrepo-com.64b145eb257bdd38d25e9fe55b7a4734.svg",
+    "static/media/email-mail-svgrepo-com.svg": "/will-pgm-studio/static/media/email-mail-svgrepo-com.7ad2c3bfbfa333565a5d6b1a6fdb872d.svg",
+    "static/media/calculator-svgrepo-com.svg": "/will-pgm-studio/static/media/calculator-svgrepo-com.d67f0e5b70ffea6a14dd7f5ede9459f2.svg",
+    "static/media/calendar-svgrepo-com.svg": "/will-pgm-studio/static/media/calendar-svgrepo-com.5f40158103add1aff8df361131d07933.svg",
+    "static/media/recipe-svgrepo-com.svg": "/will-pgm-studio/static/media/recipe-svgrepo-com.ab600d40fcbccbfecdb6252702048b68.svg",
+    "static/media/weather-color-moon-cloud-light-svgrepo-com.svg": "/will-pgm-studio/static/media/weather-color-moon-cloud-light-svgrepo-com.aa9512c47903844ff1e3f2180547cf23.svg",
     "index.html": "/will-pgm-studio/index.html",
+    "static/media/gui-todo-list-svgrepo-com.svg": "/will-pgm-studio/static/media/gui-todo-list-svgrepo-com.fb9c772232468fda3b4657b5201a8837.svg",
     "main.245472eb.css.map": "/will-pgm-studio/static/css/main.245472eb.css.map",
-    "main.c8235db6.js.map": "/will-pgm-studio/static/js/main.c8235db6.js.map"
+    "main.2c1dd39f.js.map": "/will-pgm-studio/static/js/main.2c1dd39f.js.map"
   },
   "entrypoints": [
     "static/css/main.245472eb.css",
-    "static/js/main.c8235db6.js"
+    "static/js/main.2c1dd39f.js"
   ]
 }
