@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Sider from "./Sider";
 import DOMPurify from "dompurify";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -16,7 +17,9 @@ const Blog = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/posts${cat}`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/posts${cat}`
+        );
         setPosts(res.data);
       } catch (err) {
         console.log(err);
@@ -33,7 +36,7 @@ const Blog = () => {
         <div className="row">
           <div className="col-md-9">
             {isLoading ? (
-       <Spinner animation="border" variant="primary" />
+              <Spinner animation="border" variant="primary" />
             ) : (
               posts
                 .slice()
@@ -46,8 +49,8 @@ const Blog = () => {
                       state={post}
                     >
                       <h1>{post.title}</h1>
-
-                      <img className="img-fluid" src={post.imgUrl} alt="" />
+                      <LazyLoadImage alt={post.title} src={post.imgUrl} className="img-fluid"/>
+                      {/* <img className="img-fluid" src={post.imgUrl} alt="" /> */}
                     </Link>
                     <p
                       dangerouslySetInnerHTML={{

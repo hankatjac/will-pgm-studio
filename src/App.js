@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Event from "./components/event/Event";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import NoPage from "./components/NoPage";
 import Blog from "./components/blog/Blog";
 import Write from "./components/blog/Write";
 import Single from "./components/blog/Single";
@@ -41,8 +40,7 @@ function App() {
           <Route path="recipe/:id" element={<Recipe />} />
           <Route path="recipe/:id" element={<Recipe />} />
           <Route path="/weather" element={<Weather />} />
-
-          <Route path="*" element={<NoPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </HashRouter>

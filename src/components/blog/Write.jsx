@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
 import { AppContext } from "../../contexts/appContext";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 import { uploadToCloudinary } from "../../utils/upload";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
@@ -12,8 +12,6 @@ import "react-quill-new/dist/quill.snow.css";
 const Write = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState(null);
-
-  // const [uploading, setUploading] = useState(false);
 
   const inputRef = useRef(null);
   const blog = useLocation().state;
@@ -52,23 +50,25 @@ const Write = () => {
     inputRef.current?.click();
   };
 
-  const handleUpload = async () => {
+  const handleImageUpload = async (file, blog) => {
+    let blogImage = null;
+  
     if (file) {
       try {
         // Upload blog image
-        const blogImage = await uploadToCloudinary(file);
+        blogImage = await uploadToCloudinary(file);
         if (!blogImage) {
           throw new Error("Unexpected API response: image upload failed.");
         }
-        return { url: blogImage?.url, public_id: blogImage?.public_id };
       } catch (err) {
         console.error(err);
         alert(`An error occurred while uploading images: ${err.message}`);
+        return null;
       }
-
+  
       if (blog) {
         try {
-          // Delete the image from Cloudinary
+          // Delete the existing image from Cloudinary
           await axios.post(
             `${process.env.REACT_APP_API_URL}/img/cloudinary/delete`,
             {
@@ -79,17 +79,18 @@ const Write = () => {
           console.error(err);
           alert("An error occurred while deleting images from Cloudinary");
         }
-      } else {
-        if (!file) {
-          alert("Please upload an image");
-          return;
-        }
       }
+    } else if (!blog) {
+      alert("Please upload an image");
+      return null;
     }
+  
+    return blogImage;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (inputRef.current.files.length === 0 && !!blog === false) {
       setMessage(true);
       return;
@@ -100,7 +101,14 @@ const Write = () => {
       return;
     }
 
-    const { url, public_id } = await handleUpload();
+    setIsLoading(true);
+
+    const blogImage = await handleImageUpload(file, blog);
+  
+    if (!blogImage && !blog) {
+      setIsLoading(false);
+      return;
+    }
 
     try {
       if (blog) {
@@ -109,8 +117,8 @@ const Write = () => {
           title,
           desc: value,
           cat,
-          imgUrl: file ? url : blog.imgUrl,
-          imgId: file ? public_id : blog.imgId,
+          imgUrl: file ? blogImage.url : blog.imgUrl,
+          imgId: file ? blogImage.public_id : blog.imgId,
         });
         file && deletePostImage(blog.imgId);
       } else {
@@ -119,8 +127,8 @@ const Write = () => {
           title,
           desc: value,
           cat,
-          imgUrl: url,
-          imgId: public_id,
+          imgUrl: blogImage.url,
+          imgId: blogImage.public_id,
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
         });
       }

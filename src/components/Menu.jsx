@@ -1,27 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../contexts/appContext";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import getCurrentUser from "../utils/getCurrentUser";
+
 
 const Menu = () => {
-  const { logout } = useContext(AppContext);
-  const [currentUser, setCurentUser] = useState("");
+  const { logout, currentUser} = useContext(AppContext);
   const { t } = useTranslation();
-  const location = useLocation();
-
-  useEffect(() => {
-    const checkUser = async () => {
-      const user = getCurrentUser();
-      setCurentUser(user);
-    };
-
-    checkUser();
-  }, [location]); // Runs on route change or when currentUser changes
 
   return (
     <section>

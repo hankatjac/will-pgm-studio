@@ -20,6 +20,7 @@ export const AppContextProvider = ({ children }) => {
       data
     );
     localStorage.setItem("currentUser", JSON.stringify(res.data)); // Persistent storage
+    setCurrentUser(res.data); // Update the global state
   };
 
   const logout = async () => {
