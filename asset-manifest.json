@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/will-pgm-studio/static/css/main.245472eb.css",
-    "main.js": "/will-pgm-studio/static/js/main.2c1dd39f.js",
+    "main.js": "/will-pgm-studio/static/js/main.d8e38f62.js",
     "static/media/blog-svgrepo-com.svg": "/will-pgm-studio/static/media/blog-svgrepo-com.64b145eb257bdd38d25e9fe55b7a4734.svg",
     "static/media/email-mail-svgrepo-com.svg": "/will-pgm-studio/static/media/email-mail-svgrepo-com.7ad2c3bfbfa333565a5d6b1a6fdb872d.svg",
     "static/media/calculator-svgrepo-com.svg": "/will-pgm-studio/static/media/calculator-svgrepo-com.d67f0e5b70ffea6a14dd7f5ede9459f2.svg",
@@ -11,10 +11,10 @@
     "index.html": "/will-pgm-studio/index.html",
     "static/media/gui-todo-list-svgrepo-com.svg": "/will-pgm-studio/static/media/gui-todo-list-svgrepo-com.fb9c772232468fda3b4657b5201a8837.svg",
     "main.245472eb.css.map": "/will-pgm-studio/static/css/main.245472eb.css.map",
-    "main.2c1dd39f.js.map": "/will-pgm-studio/static/js/main.2c1dd39f.js.map"
+    "main.d8e38f62.js.map": "/will-pgm-studio/static/js/main.d8e38f62.js.map"
   },
   "entrypoints": [
     "static/css/main.245472eb.css",
-    "static/js/main.2c1dd39f.js"
+    "static/js/main.d8e38f62.js"
   ]
 }
