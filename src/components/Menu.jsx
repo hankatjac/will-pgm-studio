@@ -7,9 +7,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-
 const Menu = () => {
-  const { logout, currentUser} = useContext(AppContext);
+  const { logout, currentUser } = useContext(AppContext);
   const { t } = useTranslation();
 
   return (
@@ -35,7 +34,7 @@ const Menu = () => {
               </Nav.Link>
 
               <Nav.Link as={Link} eventKey="3" to="/posts">
-                {t("posts")}
+                {t("blog")}
               </Nav.Link>
 
               <Nav.Link as={Link} eventKey="2" to="/event">
@@ -43,16 +42,16 @@ const Menu = () => {
               </Nav.Link>
 
               <Nav.Link as={Link} eventKey="5" to="/working-hours">
-                calculator
+                {t("calculator")}
               </Nav.Link>
               <Nav.Link as={Link} eventKey="5" to="/todo">
-                todo
+                {t("todo")}
               </Nav.Link>
               <Nav.Link as={Link} eventKey="5" to="/recipe">
-                food recipe
+                {t("recipe")}
               </Nav.Link>
               <Nav.Link as={Link} eventKey="5" to="/weather">
-                weather
+                {t("weather")}
               </Nav.Link>
               <Nav.Link as={Link} eventKey="5" to="/contact">
                 {t("contact")}
@@ -63,17 +62,17 @@ const Menu = () => {
               <Nav.Link>{currentUser?.username}</Nav.Link>
               {currentUser ? (
                 <Nav.Link eventKey={1} as={Link} to="/" onClick={logout}>
-                  Logout
+                  {t("logout")}
                 </Nav.Link>
               ) : (
                 <Nav.Link eventKey={1} as={Link} to="/login">
-                  Login
+                  {t("login")}
                 </Nav.Link>
               )}
 
               {!currentUser && (
                 <Nav.Link eventKey={2} as={Link} to="/register">
-                  Register
+                  {t("register")}
                 </Nav.Link>
               )}
             </Nav>

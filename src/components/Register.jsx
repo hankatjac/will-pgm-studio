@@ -37,7 +37,7 @@ const Register = () => {
   return (
     <section className="container col col-md-5 py-5" id="register">
       <div className="text-center">
-        <h1 className="fw-bolder text-capitalize">{t("sign up")}</h1>
+        <h1 className="fw-bolder text-capitalize">{t("register")}</h1>
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"

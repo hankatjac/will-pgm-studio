@@ -5,15 +5,15 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Importing translation files
 
-import en from "./assets/i18n/translations/en.json";
+// import en from "./assets/i18n/translations/en.json";
 import fr from "./assets/i18n/translations/fr.json";
 
 
 //Creating object with the variables of imported translation files
 const resources = {
-  en: {
-    translation: en,
-  },
+  // en: {
+  //   translation: en,
+  // },
   fr: {
     translation: fr,
   },

@@ -16,12 +16,14 @@ import FoodRecipe from "./components/recipe/FoodRecipe";
 import Recipe from "./components/recipe/Recipe";
 import Weather from "./components/weather/Weather";
 import { AppContext } from "./contexts/appContext";
+import AuthChecker from "./components/AuthChecker";
 
 function App() {
   const { currentUser } = useContext(AppContext);
 
   return (
     <HashRouter>
+      <AuthChecker />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -37,7 +39,6 @@ function App() {
           <Route path="working-hours" element={<WorkingHours />} />
           <Route path="todo" element={<Todo />} />
           <Route path="recipe" element={<FoodRecipe />} />
-          <Route path="recipe/:id" element={<Recipe />} />
           <Route path="recipe/:id" element={<Recipe />} />
           <Route path="/weather" element={<Weather />} />
           <Route path="*" element={<Navigate to="/" replace />} />

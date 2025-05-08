@@ -36,7 +36,9 @@ const Blog = () => {
         <div className="row">
           <div className="col-md-9">
             {isLoading ? (
-              <Spinner animation="border" variant="primary" />
+              <div className="text-center">
+                <Spinner animation="border" variant="primary" size="30"/>
+              </div>
             ) : (
               posts
                 .slice()
@@ -49,7 +51,11 @@ const Blog = () => {
                       state={post}
                     >
                       <h1>{post.title}</h1>
-                      <LazyLoadImage alt={post.title} src={post.imgUrl} className="img-fluid"/>
+                      <LazyLoadImage
+                        alt={post.title}
+                        src={post.imgUrl}
+                        className="img-fluid"
+                      />
                       {/* <img className="img-fluid" src={post.imgUrl} alt="" /> */}
                     </Link>
                     <p
