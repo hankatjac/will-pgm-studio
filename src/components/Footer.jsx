@@ -5,7 +5,7 @@ import axios from "axios";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
-import { ProgressBar } from "react-loader-spinner";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Footer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,15 +34,7 @@ const Footer = () => {
             <h3>Latest posts</h3>
             <ul className="posts">
               {isLoading ? (
-                <ProgressBar
-                  height="80"
-                  width="100%"
-                  ariaLabel="progress-bar-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="progress-bar-wrapper"
-                  borderColor="#F4442E"
-                  barColor="#51E5FF"
-                />
+             <Spinner animation="border" variant="primary" />
               ) : (
                 blogs
                   .slice(-3)

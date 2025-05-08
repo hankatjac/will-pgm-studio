@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
 import { AppContext } from "../../contexts/appContext";
-import { ColorRing } from "react-loader-spinner";
+import Spinner from 'react-bootstrap/Spinner';
 import { uploadToCloudinary } from "../../utils/upload";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
@@ -61,7 +61,6 @@ const Write = () => {
           throw new Error("Unexpected API response: image upload failed.");
         }
         return { url: blogImage?.url, public_id: blogImage?.public_id };
-
       } catch (err) {
         console.error(err);
         alert(`An error occurred while uploading images: ${err.message}`);
@@ -70,9 +69,12 @@ const Write = () => {
       if (blog) {
         try {
           // Delete the image from Cloudinary
-          await axios.post(`${process.env.REACT_APP_API_URL}/img/cloudinary/delete`, {
-            public_ids: [blog.imgId], // Pass an array of public IDs for the images
-          });
+          await axios.post(
+            `${process.env.REACT_APP_API_URL}/img/cloudinary/delete`,
+            {
+              public_ids: [blog.imgId], // Pass an array of public IDs for the images
+            }
+          );
         } catch (err) {
           console.error(err);
           alert("An error occurred while deleting images from Cloudinary");
@@ -108,9 +110,9 @@ const Write = () => {
           desc: value,
           cat,
           imgUrl: file ? url : blog.imgUrl,
-          imgId: file ? public_id : blog.public_id,
+          imgId: file ? public_id : blog.imgId,
         });
-        file && deletePostImage(blog.public_id);
+        file && deletePostImage(blog.imgId);
       } else {
         setIsLoading(true);
         await axios.post(`${process.env.REACT_APP_API_URL}/posts/`, {
@@ -251,21 +253,7 @@ const Write = () => {
               {/* <button>Save as a draft</button> */}
               <button type="submit" className="btn btn-primary d-block mx-auto">
                 {isLoading ? (
-                  <ColorRing
-                    visible={true}
-                    height="40"
-                    width="40"
-                    ariaLabel="blocks-loading"
-                    wrapperStyle={{}}
-                    wrapperClass="blocks-wrapper"
-                    colors={[
-                      "#e15b64",
-                      "#f47e60",
-                      "#f8b26a",
-                      "#abbd81",
-                      "#849b87",
-                    ]}
-                  />
+                  <Spinner animation="border" variant="primary" />
                 ) : (
                   "Publish"
                 )}

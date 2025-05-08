@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ProgressBar } from "react-loader-spinner";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Like = ({ cat, id }) => {
   const [filterPost, setFilterPost] = useState([]);
@@ -28,15 +28,7 @@ const Like = ({ cat, id }) => {
       <div className="card-body">
         <h4 className="card-title">Similar Post</h4>
         {isLoading ? (
-          <ProgressBar
-            height="80"
-            width="100%"
-            ariaLabel="progress-bar-loading"
-            wrapperStyle={{}}
-            wrapperClass="progress-bar-wrapper"
-            borderColor="#F4442E"
-            barColor="#51E5FF"
-          />
+     <Spinner animation="border" variant="primary" />
         ) : (
           filterPost.map((post) => (
             <div className="post" key={post.id}>

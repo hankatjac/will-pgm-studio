@@ -1,11 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import Header from "./Header";
-import Tasks from "./Tasks";
+// import Tasks from "./Tasks";
 import AddTask from "./AddTask";
 import axios from "axios";
 import { AppContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
-import { ProgressBar } from "react-loader-spinner";
+import Spinner from "react-bootstrap/Spinner";
+import Confirm from "../Confirm";
+import { MdDelete } from "react-icons/md";
+import { GrEdit } from "react-icons/gr";
 
 const Todo = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,10 +16,11 @@ const Todo = () => {
   const { logout } = useContext(AppContext);
   const [showAddTask, setShowAddTask] = useState(false);
   const [fetch, setFetch] = useState(true);
-  const [editTask, setEditTask] = useState("");
-  // const [err, setErr] = useState("");
+  const [editTask, setEditTask] = useState(null);
+  const [taskIdToDelete, setTaskIdToDelete] = useState("");
 
   const [tasks, setTasks] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false); // State for confirmation dialog
 
   // Fetch Task
   useEffect(() => {
@@ -38,16 +42,9 @@ const Todo = () => {
         setFetch(false);
         setIsLoading(false);
       };
-      fetchData(); 
+      fetchData();
     }
   }, [fetch, logout, nav]);
-
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     logout();
-  //     nav("/login");
-  //   }
-  // }, [isAuthenticated]);
 
   // const fetchTask = async (id) => {
   //   const res = await fetch(`http://localhost:5000/tasks/${id}`);
@@ -59,8 +56,8 @@ const Todo = () => {
   const addTask = async (task) => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/todos/`, task);
+      setFetch(true);
     } catch (err) {
-      // setErr(err.response.data);
       alert(err.response.data);
       if (err.response.status === 401) {
         logout();
@@ -68,11 +65,8 @@ const Todo = () => {
       }
       console.log(err);
     }
-    setFetch(true);
     // setTasks([...tasks, task]);
   };
-
-  console.log(tasks);
 
   // Toggle Reminder
   const toggleReminder = async (task) => {
@@ -83,7 +77,6 @@ const Todo = () => {
         updTask
       );
     } catch (err) {
-      // setErr(err.response.data);
       alert(err.response.data);
       if (err.response.status === 401) {
         logout();
@@ -106,7 +99,7 @@ const Todo = () => {
   };
 
   //pass the task for edit
-  const handleEditTask = (task) => {
+  const editTaskClick = (task) => {
     console.log(task.id);
     setShowAddTask(!showAddTask);
     // tasks.map((task) => (task.id === id ? setEditTask(task) : ""));
@@ -115,8 +108,8 @@ const Todo = () => {
   // console.log("task for edit", editTask);
 
   // save updatedtask to database
-  const handleEditTask2 = async (task) => {
-    console.log(task.text);
+  const handleEditTask = async (task) => {
+    console.log(task.id);
     try {
       await axios.put(
         `${process.env.REACT_APP_API_URL}/todos/${task.id}`,
@@ -140,23 +133,27 @@ const Todo = () => {
     setTasks(updatedTasks);
   };
 
+  const handleDeleteClick = (id) => {
+    setTaskIdToDelete(id); // Set the ID of the event to delete
+    setOpenDialog(true); // Open the confirmation dialog
+  };
+
   // Delete Task
-  const deleteTask = async (id) => {
+  const confirmDeleteTask = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/todos/${id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/todos/${taskIdToDelete}`
+      );
+      // setTasks(tasks.filter((task) => task.id !== id));
+      setFetch(true)
+      setOpenDialog(false);
     } catch (err) {
-      // setErr(err.response.data);
       alert(err.response.data);
       if (err.response.status === 401) {
         logout();
         nav("/login");
       }
-      console.log(err);
-      return;
     }
-
-    //  We should control the response status to decide if we will change the state or not.
-    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   return (
@@ -169,41 +166,64 @@ const Todo = () => {
 
       {showAddTask && (
         <AddTask
-          addTask={addTask}
-          onEdit={handleEditTask2}
-          toUpdateTask={editTask}
+          onAdd={addTask}
+          onEdit={handleEditTask}
+          editTask={editTask}
           setShowAddTask={setShowAddTask}
         />
       )}
       {isLoading ? (
-        <ProgressBar
-          height="80"
-          width="100%"
-          ariaLabel="progress-bar-loading"
-          wrapperStyle={{}}
-          wrapperClass="progress-bar-wrapper"
-          borderColor="#F4442E"
-          barColor="#51E5FF"
-        />
+        <Spinner animation="border" variant="primary" />
       ) : tasks.length > 0 ? (
-        <Tasks
-          tasks={tasks}
-          onDelete={deleteTask}
-          onToggle={toggleReminder}
-          onEdit={handleEditTask}
-        />
+        tasks.map((task) => {
+          return (
+            <div
+              className={`task ${task.reminder && "reminder"} container `}
+              onDoubleClick={() => toggleReminder(task)}
+            >
+              <div className="row">
+                <div className="col-md-8">
+                  <h3>{task.text}</h3>
+                  <p>{task.day}</p>
+                </div>
+                <div className="col-md-2 my-3">
+                  <MdDelete
+                    style={{
+                      color: "red",
+                      cursor: "pointer",
+                      width: "30px",
+                      height: "30px",
+                    }}
+                    onClick={() => handleDeleteClick(task.id)}
+                  />
+                </div>
+                <div className="col-md-2 my-3">
+                  <GrEdit
+                    style={{
+                      color: "blue",
+                      cursor: "pointer",
+                      width: "30px",
+                      height: "30px",
+                    }}
+                    onClick={() => editTaskClick(task)}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })
       ) : (
         "No Tasks To Show"
       )}
 
-      {/* {err && (
-        <div
-          className="bg-danger fs-5"
-          style={{ width: "fit-content", margin: "auto" }}
-        >
-          {err}
-        </div>
-      )} */}
+      {/* Reusable Confirmation Dialog */}
+      <Confirm
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        onConfirm={confirmDeleteTask}
+        title="Confirm Deletion"
+        description="Are you sure you want to delete this event? This action cannot be undone."
+      />
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import getCurrentUser from "../utils/getCurrentUser";
 import axios from "axios";
 
-
 const AuthChecker = () => {
   const [currentUser, setCurentUser] = useState("");
   const location = useLocation();

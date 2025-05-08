@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Sider from "./Sider";
 import DOMPurify from "dompurify";
-import { ProgressBar } from "react-loader-spinner";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -33,15 +33,7 @@ const Blog = () => {
         <div className="row">
           <div className="col-md-9">
             {isLoading ? (
-              <ProgressBar
-                height="80"
-                width="100%"
-                ariaLabel="progress-bar-loading"
-                wrapperStyle={{}}
-                wrapperClass="progress-bar-wrapper"
-                borderColor="#F4442E"
-                barColor="#51E5FF"
-              />
+       <Spinner animation="border" variant="primary" />
             ) : (
               posts
                 .slice()

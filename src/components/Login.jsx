@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../contexts/appContext";
-import { ColorRing } from "react-loader-spinner";
+import Spinner from 'react-bootstrap/Spinner';
 import avatar from "../assets/img/logos/avatar_2x.png";
 
 const Login = () => {
@@ -82,15 +82,7 @@ const Login = () => {
         <div className="col-lg-12 text-center">
           <div id="success">{message}</div>
           {loading ? (
-            <ColorRing
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="blocks-loading"
-              wrapperStyle={{}}
-              wrapperClass="blocks-wrapper"
-              colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-            />
+            <Spinner animation="border" variant="primary" />
           ) : (
             <button
               id="sendMessageButton"

@@ -4,14 +4,9 @@ import moment from "moment";
 import axios from "axios";
 import { AppContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
-import { ProgressBar } from "react-loader-spinner";
+import Spinner from "react-bootstrap/Spinner";
 import { MdDeleteForever } from "react-icons/md";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
+import Confirm from "../Confirm";
 
 const Event = () => {
   const [isLoading] = useState(false);
@@ -19,7 +14,7 @@ const Event = () => {
   const { logout, events, getEvents } = useContext(AppContext);
   // const [events, setEvents] = useState([]);
   const [openDialog, setOpenDialog] = useState(false); // State for confirmation dialog
-  const [eventToDelete, setEventToDelete] = useState(null); // ID of the event to delete
+  const [eventIdToDelete, setEventIdToDelete] = useState(''); // ID of the event to delete
 
   useEffect(() => {
     getEvents(); // Fetch events when the component mounts
@@ -57,18 +52,18 @@ const Event = () => {
   };
 
   const handleDeleteClick = (id) => {
-    setEventToDelete(id); // Set the ID of the event to delete
+    setEventIdToDelete(id); // Set the ID of the event to delete
     setOpenDialog(true); // Open the confirmation dialog
   };
 
   const confirmDeleteEvent = async () => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/events/${eventToDelete}`
+        `${process.env.REACT_APP_API_URL}/events/${eventIdToDelete}`
       );
       await getEvents(); // Fetch the latest events after deleting
       // setEvents((prevEvents) =>
-      //   prevEvents.filter((event) => event.id !== eventToDelete)
+      //   prevEvents.filter((event) => event.id !== eventIdToDelete)
       // ); // Update state
       setOpenDialog(false); // Close the dialog
     } catch (err) {
@@ -87,15 +82,7 @@ const Event = () => {
         <h1 className="text-center fw-bolder">Upcoming events</h1>
         <div id="main" className="col-12 col-md-5 pt-5">
           {isLoading ? (
-            <ProgressBar
-              height="80"
-              width="100%"
-              ariaLabel="progress-bar-loading"
-              wrapperStyle={{}}
-              wrapperClass="progress-bar-wrapper"
-              borderColor="#F4442E"
-              barColor="#51E5FF"
-            />
+            <Spinner animation="border" variant="primary" />
           ) : (
             events.map((event, index) => {
               const { id, title, desc, start, end } = event;
@@ -137,27 +124,14 @@ const Event = () => {
         </div>
       </div>
 
-      {/* Confirmation Dialog */}
-      <Dialog
+      {/* Reusable Confirmation Dialog */}
+      <Confirm
         open={openDialog}
         onClose={() => setOpenDialog(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this event? This action cannot be
-            undone.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-          <Button onClick={confirmDeleteEvent} color="error" autoFocus>
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
+        onConfirm={confirmDeleteEvent}
+        title="Confirm Deletion"
+        description="Are you sure you want to delete this event? This action cannot be undone."
+      />
     </div>
   );
 };

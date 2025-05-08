@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
@@ -15,11 +15,11 @@ import WorkingHours from "./components/WorkingHours";
 import Todo from "./components/todo/Todo";
 import FoodRecipe from "./components/recipe/FoodRecipe";
 import Recipe from "./components/recipe/Recipe";
-import getCurrentUser from "./utils/getCurrentUser";
 import Weather from "./components/weather/Weather";
+import { AppContext } from "./contexts/appContext";
 
 function App() {
-  const currentUser = getCurrentUser();
+  const { currentUser } = useContext(AppContext);
 
   return (
     <HashRouter>
@@ -41,9 +41,6 @@ function App() {
           <Route path="recipe/:id" element={<Recipe />} />
           <Route path="recipe/:id" element={<Recipe />} />
           <Route path="/weather" element={<Weather />} />
-
-
-
 
           <Route path="*" element={<NoPage />} />
         </Route>

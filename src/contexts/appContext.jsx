@@ -1,5 +1,6 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useState, useEffect } from "react";
 import axios from "axios";
+import getCurrentUser from "../utils/getCurrentUser";
 
 export const AppContext = createContext();
 
@@ -7,6 +8,11 @@ export const AppContextProvider = ({ children }) => {
   axios.defaults.withCredentials = true;
 
   const [events, setEvents] = useState([]);
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
+
+  useEffect(() => {
+    setCurrentUser(getCurrentUser()); // Update currentUser when the component mounts
+  }, []);
 
   const login = async (data) => {
     const res = await axios.post(
@@ -19,6 +25,7 @@ export const AppContextProvider = ({ children }) => {
   const logout = async () => {
     await axios.post(`${process.env.REACT_APP_API_URL}/auth/logout`);
     localStorage.removeItem("currentUser"); // Clear persistent storage
+    setCurrentUser(null); // Update the global state
   };
 
   const deletePostImage = async (id) => {
@@ -56,7 +63,7 @@ export const AppContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ login, logout, deletePostImage, events, getEvents }}
+      value={{ login, logout, deletePostImage, events, getEvents, currentUser }}
     >
       {children}
     </AppContext.Provider>

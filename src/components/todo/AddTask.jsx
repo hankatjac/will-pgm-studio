@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const AddTask = ({ addTask, onEdit, toUpdateTask, setShowAddTask }) => {
-  const [id] = useState(toUpdateTask.id || ""); // Removed `setId`
-  const [text, setText] = useState(toUpdateTask.text || "");
-  const [day, setDay] = useState(toUpdateTask.day || "");
-  const [reminder, setReminder] = useState(toUpdateTask.reminder || false);
+const AddTask = ({ onAdd, onEdit, editTask, setShowAddTask }) => {
+  const [id] = useState(editTask.id || ""); // Removed `setId`
+  const [text, setText] = useState(editTask.text || "");
+  const [day, setDay] = useState(editTask.day || "");
+  const [reminder, setReminder] = useState(editTask.reminder || false);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -13,11 +13,11 @@ const AddTask = ({ addTask, onEdit, toUpdateTask, setShowAddTask }) => {
       alert("Please add a task");
       return;
     }
-    if (toUpdateTask) {
+    if (editTask) {
       onEdit({ id, text, day, reminder });
       setShowAddTask(false);
     } else {
-      addTask({ text, day, reminder });
+      onAdd({ text, day, reminder });
     }
 
     setText("");

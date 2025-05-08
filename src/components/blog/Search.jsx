@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Sider from "./Sider";
-import { ProgressBar } from "react-loader-spinner";
+import Spinner from 'react-bootstrap/Spinner';
 import DOMPurify from "dompurify";
 
 const Search = () => {
@@ -51,15 +51,7 @@ const Search = () => {
         <div className="row">
           <div className="col-md-9">
             {isLoading ? (
-              <ProgressBar
-                height="80"
-                width="100%"
-                ariaLabel="progress-bar-loading"
-                wrapperStyle={{}}
-                wrapperClass="progress-bar-wrapper"
-                borderColor="#F4442E"
-                barColor="#51E5FF"
-              />
+        <Spinner animation="border" variant="primary" />
             ) : (
               searchedPosts.map((post) => (
                 <div key={post.id} className="card mb-4">

@@ -9,6 +9,7 @@ import { AppContext } from "../../contexts/appContext";
 import { MdDelete } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
 import getCurrentUser from "../../utils/getCurrentUser";
+import Confirm from "../Confirm";
 
 const Single = () => {
   // const { id } = useParams();
@@ -20,8 +21,9 @@ const Single = () => {
   const { logout, deletePostImage } = useContext(AppContext);
   const currentUser = getCurrentUser();
   const post = useLocation().state;
+  const [openDialog, setOpenDialog] = useState(false);
 
-  const handleDelete = async () => {
+  const confirmDeleteBlog = async () => {
     try {
       await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${post.id}`);
       navigate("/posts");
@@ -69,7 +71,9 @@ const Single = () => {
                     width: "30px",
                     height: "30px",
                   }}
-                  onClick={handleDelete}
+                  onClick={() => {
+                    setOpenDialog(true);
+                  }}
                 />
               </div>
             )}
@@ -106,6 +110,15 @@ const Single = () => {
           {/* <Menu cat={post.cat} /> */}
         </div>
       </div>
+
+      {/* Reusable Confirmation Dialog */}
+      <Confirm
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        onConfirm={confirmDeleteBlog}
+        title="Confirm Deletion"
+        description="Are you sure you want to delete this event? This action cannot be undone."
+      />
     </div>
   );
 };
