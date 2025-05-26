@@ -70,11 +70,11 @@ const Todo = () => {
 
   // Toggle Reminder
   const toggleReminder = async (task) => {
-    const updTask = { ...task, reminder: !task.reminder };
+    const updatedTask = { ...task, reminder: !task.reminder };
     try {
       await axios.put(
         `${process.env.REACT_APP_API_URL}/todos/${task.id}`,
-        updTask
+        updatedTask
       );
     } catch (err) {
       alert(err.response.data);
